@@ -2,7 +2,7 @@
 import  { useState } from 'react'
 import AuthImage from '../assets/Auth.gif'
 import { Link, useNavigate } from 'react-router-dom';
-import {loginAPI, registerAPI} from '../Services/AllAPIs';
+import { loginAPI,registerAPI } from '../Services/AllApis';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -48,7 +48,8 @@ function Auth({register}) {
             progress: undefined,
             theme: "colored",
             });
-
+           sessionStorage.setItem("user",JSON.stringify(response.data.user));
+          sessionStorage.setItem("token",response.data.token);
             setTimeout(()=>{
               navigate('/login')
             },6000)
