@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import ProjectCard from '../Components/ProjectCard';
 
 function Home() {
+
+  //let token = sessionStorage.getItem('token');
+
   return (
     <div>
         <section>
@@ -14,10 +17,16 @@ function Home() {
             include science projects, they can also include projects in areas such as history, social studies, art, and technology.
             While some project fairs may include science projects, they can also include projects in areas such as history, social studies, art, and technology.
            </p>
+          
            <div className='text-center'>
+           {
+           
            <Link to={'/login'}>
             <button className='btn btn-warning'>Get Started</button>
            </Link>
+           
+           }
+
            </div>
         </div>
 

@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { loginAPI,registerAPI } from '../Services/AllApis';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Spinner from 'react-bootstrap/Spinner';
 
 function Auth({register}) {
   console.log(register);
@@ -147,12 +148,17 @@ function Auth({register}) {
                 {
                   register ? 
                   <div>
-                    <button onClick={handleRegister} className='btn btn-outline-info mb-3'>Sign Up</button>
+                    <button onClick={handleRegister} className='btn btn-outline-info mb-3'>
+                      Sign Up 
+                    </button>
                     <p>Already Registerd? <Link to={'/login'}>Login Here...</Link> </p>
                   </div>
                   :
                     <div>
-                       <button  onClick={handleLogin} className='btn btn-outline-info mb-3'>Sign In</button>
+                       <button  onClick={handleLogin} className='btn btn-outline-info mb-3'>
+                        Sign In
+                        <Spinner animation="border" variant="light" className='fs-3 mt-1'/>
+                        </button>
                        <p>New to here? <Link to={'/register'}>Please register Here...</Link> </p>
                     </div>
                 }
