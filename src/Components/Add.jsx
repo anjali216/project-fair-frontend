@@ -1,58 +1,94 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import userImg from '../assets/Auth.gif'
 import {
+    MDBBtn,
     MDBModal,
     MDBModalDialog,
     MDBModalContent,
     MDBModalHeader,
     MDBModalTitle,
     MDBModalBody,
-    MDBBtn
+    MDBModalFooter,
   } from 'mdb-react-ui-kit';
-
   
-function Add() {
-    const [optSmModal, setOptSmModal] = useState(false);
 
-    const toggleOpen = () => setOptSmModal(!optSmModal);
+function Add() {
+    const [staticModal, setStaticModal] = useState(false);
+    const toggleOpen = () => setStaticModal(!staticModal);
+
+    const [ProjectDetails,setProjectDetails] = useState({
+      title:'',language:'',github:'',website:'',overview:'',ProjectImg:''
+    })
+    console.log(ProjectDetails);
+    
+
+    const [imgFileStatus,setImgFileStatus] = useState(false)
+
+    //to assign image url
+    const [preview,setPreview] = useState(userImg);
+
+
+    useEffect(()=>{
+      if(ProjectDetails.ProjectImg.type ==='image/png' || ProjectDetails.ProjectImg.type ==='image/jpeg'|| ProjectDetails.ProjectImg.type ==='image/jpg'){
+        setImgFileStatus(true)
+
+        //convert img file into url 
+        setPreview(URL.createObjectURL(ProjectDetails.ProjectImg))
+      }
+      else{
+        setImgFileStatus(false)
+        // setProjectDetails({...ProjectDetails,ProjectImg:""})
+      }      
+    },[ProjectDetails.ProjectImg])
 
   return (
-    <div>
-    <button className='btn btn-info' style={{float:'right'}} onClick={toggleOpen}> Add </button>  
-    <MDBModal open={optSmModal} tabIndex='-1' onClose={() => setOptSmModal(false)}>
-    <MDBModalDialog size='lg'>
-      <MDBModalContent>
-        <MDBModalHeader>
-          <MDBModalTitle>Project Name</MDBModalTitle>
-          <MDBBtn className='btn-close' color='none' onClick={toggleOpen}></MDBBtn>
-        </MDBModalHeader>
-        <MDBModalBody>
-          <div className="row">
-            <div className="col-6">
-              <label>
-                <input type="file" style={{display:'none'}} />
-                <img src="https://media.tenor.com/2fXbn6Xtt0UAAAAM/software-software-development.gif" width={'100%'} alt="" />
-              </label>
+    <div >
+      <MDBBtn onClick={toggleOpen}>Add</MDBBtn>
+
+    <MDBModal staticBackdrop tabIndex='-1' open={staticModal} onClose={() => setStaticModal(false)}>
+      <MDBModalDialog>
+        <MDBModalContent>
+          <MDBModalHeader>
+            <MDBModalTitle>Add Project</MDBModalTitle>
+            <MDBBtn className='btn-close' color='none' onClick={toggleOpen}></MDBBtn>
+          </MDBModalHeader>
+          <MDBModalBody> 
+            <div className="row d-flex justify-content-evenly ">
+                <div className="col-6 p-2 m-3">
+                    <label >
+                        <input type="file" onChange={(e)=>setProjectDetails({...ProjectDetails,ProjectImg:e.target.files[0]})} style={{display:'none'}} />
+                        <img src={preview} width={'100%'} alt="" />
+                    </label>
+                    {
+                      !imgFileStatus && 
+                      <div className='text-center fw-bolder text-danger'>* Only allowed the following file type . 
+                      jpg,.jpeg,.png
+
+                      </div>
+                    }
+                </div>
             </div>
-            <div className="col-6">
-               
-              <input type="text" className='form-control mb-3' placeholder='Title'  />
-              <input type="text" className='form-control mb-3' placeholder='Language'  />
-              <input type="text" className='form-control mb-3' placeholder='Github'  />
-              <input type="text" className='form-control mb-3' placeholder='Website'  />
-              <textarea className='form-control mb-3' placeholder='Overview' ></textarea>
-              <div className='d-flex justify-content-evenly'>
-              <button type='submit' className='btn btn-success'>Add</button>
-              <button type='submit' onClick={toggleOpen} className='btn btn-dark'>Cancel</button>
-              </div>
-                
-             </div>
-          </div>
-        </MDBModalBody>
-      </MDBModalContent>
-    </MDBModalDialog>
-  </MDBModal>
-    </div>
+          
+            <div className="col">
+                <form>
+                    <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,title:e.target.value})} className='form-control mb-3' placeholder='Title' />
+                    <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,language:e.target.value})} className='form-control mb-3' placeholder='Language' />
+                    <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,github:e.target.value})} className='form-control mb-3' placeholder='Github' />
+                    <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,website:e.target.value})} className='form-control mb-3' placeholder='Website' />
+                    <textarea onChange={(e)=>setProjectDetails({...ProjectDetails,overview:e.target.value})} className='form-control mb-3' placeholder='Overview'> </textarea>
+                </form>
+            </div>
+          </MDBModalBody>
+          <MDBModalFooter>
+            <MDBBtn color='secondary' type='submit' onClick={toggleOpen}>
+              Cancel
+            </MDBBtn>
+            <MDBBtn className='bg-primary' type='submit'>Add</MDBBtn>
+          </MDBModalFooter>
+        </MDBModalContent>
+      </MDBModalDialog>
+    </MDBModal></div>
   )
 }
 
