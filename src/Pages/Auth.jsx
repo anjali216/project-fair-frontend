@@ -50,8 +50,7 @@ console.log(register);
             progress: undefined,
             theme: "colored",
             });
-           sessionStorage.setItem("user",JSON.stringify(response.data.user));
-          sessionStorage.setItem("token",response.data.token);
+          
             setTimeout(()=>{
               navigate('/login')
             },6000)
@@ -106,6 +105,8 @@ console.log(register);
           theme: "colored",
          
           });
+          sessionStorage.setItem("user",JSON.stringify(response.data.user));
+          sessionStorage.setItem("token",response.data.token);
          setTimeout(()=>{
           navigate('/dashboard');
          },6000)
