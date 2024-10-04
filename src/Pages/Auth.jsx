@@ -8,7 +8,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Spinner from 'react-bootstrap/Spinner';
 
 function Auth({register}) {
-  console.log(register);
+console.log(register);
+
 
   const navigate = useNavigate()
 

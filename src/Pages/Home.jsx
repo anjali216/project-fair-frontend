@@ -5,7 +5,9 @@ import ProjectCard from '../Components/ProjectCard';
 
 function Home() {
 
-  //let token = sessionStorage.getItem('token');
+  
+
+  let token =sessionStorage.getItem('token');
 
   return (
     <div>
@@ -20,13 +22,21 @@ function Home() {
           
            <div className='text-center'>
            {
+           token ?
+           
+           <Link to={'/dashboard'}>
+            <button className='btn btn-warning'>
+              View Dashboard
+            </button>
+           </Link>
+           :
            
            <Link to={'/login'}>
-            <button className='btn btn-warning'>Get Started</button>
+            <button className='btn btn-warning'>
+              Get Started
+            </button>
            </Link>
-           
            }
-
            </div>
         </div>
 

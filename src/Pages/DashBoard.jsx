@@ -5,9 +5,9 @@ import View from  '../Components/View'
 import Profile from '../Components/Profile'
 
 function Dashboard() {
-  //  const user = JSON.parse(sessionStorage.getItem('user'))
-  //  console.log(user);
-  //  let userName=user.username
+    // const user = JSON.parse(sessionStorage.getItem('user'))
+    // console.log(user);
+    // let userName=user.username
   
   return (
     <div className='row p-5'>
