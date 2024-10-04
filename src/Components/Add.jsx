@@ -18,7 +18,7 @@ function Add() {
     const toggleOpen = () => setStaticModal(!staticModal);
 
     const [ProjectDetails,setProjectDetails] = useState({
-      title:'',language:'',github:'',website:'',overview:'',ProjectImg:''
+      title:'',language:'',github:'',website:'',overview:'',ProjectImg:'',
     })
     console.log(ProjectDetails);
     
@@ -47,10 +47,10 @@ function Add() {
       <MDBBtn   className='btn btn-info' style={{float:'right'}}  onClick={toggleOpen}>Add</MDBBtn>
 
     <MDBModal staticBackdrop tabIndex='-1' open={staticModal} onClose={() => setStaticModal(false)}>
-      <MDBModalDialog>
+      <MDBModalDialog size='lg'>
         <MDBModalContent>
           <MDBModalHeader>
-            <MDBModalTitle>Add Project</MDBModalTitle>
+            <MDBModalTitle>Project Name</MDBModalTitle>
             <MDBBtn className='btn-close' color='none' onClick={toggleOpen}></MDBBtn>
           </MDBModalHeader>
           <MDBModalBody> 
