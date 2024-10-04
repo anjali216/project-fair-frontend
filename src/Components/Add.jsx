@@ -44,7 +44,7 @@ function Add() {
 
   return (
     <div >
-      <MDBBtn onClick={toggleOpen}>Add</MDBBtn>
+      <MDBBtn   className='btn btn-info' style={{float:'right'}}  onClick={toggleOpen}>Add</MDBBtn>
 
     <MDBModal staticBackdrop tabIndex='-1' open={staticModal} onClose={() => setStaticModal(false)}>
       <MDBModalDialog>
@@ -68,7 +68,7 @@ function Add() {
                       </div>
                     }
                 </div>
-            </div>
+            {/* </div> */}
           
             <div className="col">
                 <form>
@@ -79,6 +79,7 @@ function Add() {
                     <textarea onChange={(e)=>setProjectDetails({...ProjectDetails,overview:e.target.value})} className='form-control mb-3' placeholder='Overview'> </textarea>
                 </form>
             </div>
+            </div>
           </MDBModalBody>
           <MDBModalFooter>
             <MDBBtn color='secondary' type='submit' onClick={toggleOpen}>
@@ -88,7 +89,9 @@ function Add() {
           </MDBModalFooter>
         </MDBModalContent>
       </MDBModalDialog>
-    </MDBModal></div>
+    </MDBModal>
+    </div>
+    
   )
 }
 
