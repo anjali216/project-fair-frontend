@@ -68,7 +68,7 @@ function Add() {
                       </div>
                     }
                 </div>
-            {/* </div> */}
+          
           
             <div className="col">
                 <form>
