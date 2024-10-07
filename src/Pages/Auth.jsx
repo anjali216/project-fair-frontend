@@ -2,7 +2,7 @@
 import  { useState } from 'react'
 import AuthImage from '../assets/Auth.gif'
 import { Link, useNavigate } from 'react-router-dom';
-import { loginAPI,registerAPI } from '../Services/AllApis';
+import { loginAPI,registerAPI } from '../Services/AllAPIs';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Spinner from 'react-bootstrap/Spinner';
@@ -40,7 +40,7 @@ console.log(register);
         const response = await registerAPI(userData)
         console.log(response);
         if(response.status==200){
-          toast.success('Resgister Successful', {
+          toast.success('Register Successful', {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: false,

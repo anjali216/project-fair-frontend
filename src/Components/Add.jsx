@@ -1,6 +1,9 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react'
 import userImg from '../assets/Auth.gif'
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
     MDBBtn,
     MDBModal,
@@ -11,6 +14,7 @@ import {
     MDBModalBody,
     MDBModalFooter,
   } from 'mdb-react-ui-kit';
+
   
 
 function Add() {
@@ -42,9 +46,41 @@ function Add() {
       }      
     },[ProjectDetails.ProjectImg])
 
+    const handleAdd= async() =>{
+    console.log("inside add");
+     const {title,language,github,website,overview,ProjectImg} = ProjectDetails
+     if(!title || !language ||!github||!website||!overview ||!ProjectImg){
+      toast.warn('Please fill the form', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        });
+
+     }else{
+      const reqBody = new FormData()
+      reqBody.append("title",title)
+      reqBody.append("language",language)
+      reqBody.append("github",github)
+      reqBody.append("website",website)
+      reqBody.append("overview",overview)
+      reqBody.append("projectImg",ProjectImg)
+     }
+
+  
+
+     }
+
+
+
+
   return (
     <div >
-      <MDBBtn   className='btn btn-info' style={{float:'right'}}  onClick={toggleOpen}>Add</MDBBtn>
+      <MDBBtn  className='btn btn-info' style={{float:'right'}}  onClick={toggleOpen}>Add</MDBBtn>
 
     <MDBModal staticBackdrop tabIndex='-1' open={staticModal} onClose={() => setStaticModal(false)}>
       <MDBModalDialog size='lg'>
@@ -85,12 +121,26 @@ function Add() {
             <MDBBtn color='secondary' type='submit' onClick={toggleOpen}>
               Cancel
             </MDBBtn>
-            <MDBBtn className='bg-primary' type='submit'>Add</MDBBtn>
+            <MDBBtn className='bg-primary' type='submit' onClick={handleAdd}>Add</MDBBtn>
           </MDBModalFooter>
         </MDBModalContent>
       </MDBModalDialog>
     </MDBModal>
-    </div>
+   <ToastContainer 
+    position="top-center"
+    autoClose={5000}
+    hideProgressBar={false}
+    newestOnTop={false}
+    closeOnClick
+    rtl={false}
+    pauseOnFocusLoss
+    draggable
+    pauseOnHover
+    theme="colored"
+
+  />
+
+</div>
     
   )
 }

@@ -11,3 +11,8 @@ export const registerAPI = async(user)=>{
 export const loginAPI = async(user)=>{
     return await commonAPI('post',`${serverURL}/api/login`,user,"")
 }
+
+//add projects 
+export const addProject = async(project,reqHeader)=>{
+    return await commonAPI('post', `${serverURL}/api/addProject`,project,reqHeader)
+}
