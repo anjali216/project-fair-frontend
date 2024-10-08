@@ -55,7 +55,7 @@ function Home() {
      </section>
 
 <section>
-     <div className='text-center'>
+     <div className='text-center m-5'>
      <Link to={'/projects'}>
      <button className='btn btn-primary'>View Projects</button>
      </Link>

@@ -18,6 +18,6 @@ export const addProject = async(project,reqHeader)=>{
 }
 
 //get all user projects
-export const getAllProjects = async(reqHeader)=>{
+export const getAllProjectsAPI = async(reqHeader)=>{
     return await commonAPI('get',`${serverURL}/api/getAllProjects`,reqHeader)
 }
