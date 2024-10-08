@@ -54,6 +54,12 @@ function Home() {
 
      </section>
 
+     <div className='text-center'>
+     <Link to={'/projects'}>
+     <button className='btn btn-primary'>View Projects</button>
+     </Link>
+     </div>
+
     </div>
   )
 }
