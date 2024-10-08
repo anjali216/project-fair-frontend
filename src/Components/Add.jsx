@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import userImg from '../assets/Auth.gif'
 import { toast,ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { addProject } from '../Services/AllAPIs';
 
 import {
     MDBBtn,
@@ -14,6 +15,7 @@ import {
     MDBModalBody,
     MDBModalFooter,
   } from 'mdb-react-ui-kit';
+
 
   
 
@@ -47,7 +49,7 @@ function Add() {
     },[ProjectDetails.ProjectImg])
 
     const handleAdd= async() =>{
-    console.log("inside add");
+     console.log("inside add");
      const {title,language,github,website,overview,ProjectImg} = ProjectDetails
      if(!title || !language ||!github||!website||!overview ||!ProjectImg){
       toast.warn('Please fill the form', {
@@ -69,13 +71,61 @@ function Add() {
       reqBody.append("website",website)
       reqBody.append("overview",overview)
       reqBody.append("projectImg",ProjectImg)
-     }
+    
+      const token =sessionStorage.getItem("token")
+      if(token){
+        const reqHeader ={
+          "Content-Type":"multipart/form-data",
+          "authorization":`Bearer ${token}`
 
-  
-
-     }
-
-
+        }
+        try{
+          //api calling
+          const response = await addProject(reqBody,reqHeader)
+          console.log(response);
+          if(response.status==200){
+            toast.success('Project added successfully....', {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
+              toggleOpen()
+              ProjectDetails({
+                title:"",
+                language:"",
+                github:"",
+                website:"",
+                overview:"",
+                ProjectImg
+              })
+              setPreview("")
+          }
+          else{
+            toast.error(response.response.data, {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "colored",
+              });
+          }
+        }
+        catch(error){
+          console.log("Error"+error);
+          
+        }
+    }
+    
+  }
+}
 
 
   return (
