@@ -1,13 +1,38 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import ProjectCard from '../Components/ProjectCard';
+import {  getHomeProjectsAPI } from '../Services/AllAPIs';
 
 function Home() {
-
-  
+  const [projects,setProjects] = useState([])
 
   let token =sessionStorage.getItem('token');
+
+  const getHomeProjects= async()=>{
+    
+      try{
+        const HomeProjects = await getHomeProjectsAPI()
+        console.log(HomeProjects);
+        if(HomeProjects.status==200){
+          setProjects(HomeProjects.data)
+        }
+        else{
+          console.log("Cant get projects");
+          
+        }
+      }
+      catch(error){
+        console.log(error);
+        
+      }
+    }
+
+
+    useEffect(()=>{
+      getHomeProjects()
+    },[])
+  
 
   return (
     <div>
@@ -49,7 +74,16 @@ function Home() {
       <section>
      <div className='row'>
      <h1 className='m-3 text-info text-center'>Explore our Projects </h1>
-     <ProjectCard/>
+     {/* <ProjectCard/> */}
+     {
+          projects.length > 0 ? projects.map(item=>(
+            // eslint-disable-next-line react/jsx-key
+            <div className="col m-2">
+          <ProjectCard projects={item}  />
+        </div>
+          ))
+          :<p className='text-danger fw-bolder'>Cant fetch data </p>
+        }
      </div>
 
      </section>

@@ -1,11 +1,13 @@
+/* eslint-disable react/jsx-key */
 // eslint-disable-next-line no-unused-vars
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import ProjectCard from '../Components/ProjectCard'
 import { FaSearch } from "react-icons/fa";
 import {  getAllProjectsAPI } from '../Services/AllAPIs';
 
 
 function Projects() {
+  const [projects,setProjects] = useState([])
 
   const getAllProjects= async()=>{
   let token = sessionStorage.getItem('token');
@@ -16,7 +18,14 @@ function Projects() {
     }
     try{
       const allProjects = await getAllProjectsAPI(reqHeader)
-      console.log(allProjects);
+      console.log(allProjects.data);
+      if(allProjects.status==200){
+        setProjects(allProjects.data)
+      }
+      else{
+        console.log("Cant get projects");
+        
+      }
     }
     catch(error){
       console.log(error);
@@ -43,9 +52,14 @@ function Projects() {
         </div>
       </div>
       <div className="row px-5 mb-5">
-        <div className="col">
-          <ProjectCard />
+        {
+          projects.length > 0 ? projects.map(item=>(
+            <div className="col m-2">
+          <ProjectCard projects={item}  />
         </div>
+          ))
+          :<p className='text-danger fw-bolder'>Cant fetch data </p>
+        }
       </div>
     </>
   )

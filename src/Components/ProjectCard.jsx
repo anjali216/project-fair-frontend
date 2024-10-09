@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react'
 import {
@@ -17,16 +18,21 @@ import {
   } from 'mdb-react-ui-kit';
   import { FaGithub } from "react-icons/fa";
 import { FaLink } from "react-icons/fa6";
-function ProjectCard() {
+
+function ProjectCard({projects}) {
+  console.log(projects);
+  
+
     const [optSmModal, setOptSmModal] = useState(false);
 
     const toggleOpen = () => setOptSmModal(!optSmModal);
-  return (
+ 
+    return (
     <div> <div className='row'>
     <MDBCard onClick={toggleOpen} style={{ width: '350px', height: '400px' }}>
       <MDBCardImage src = 'https://liveimages.algoworks.com/new-algoworks/wp-content/uploads/2022/06/07132503/software-house-gif2-min.gif' position='top' width={'300px'} height={'350px'} alt='...' />
       <MDBCardBody>
-        <MDBCardTitle className='text-center'>Card title</MDBCardTitle>
+        <MDBCardTitle className='text-center'>{projects.title}</MDBCardTitle>
       </MDBCardBody>
     </MDBCard>
   </div>
