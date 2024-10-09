@@ -1,8 +1,36 @@
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
+import React,{useEffect} from 'react'
 import ProjectCard from '../Components/ProjectCard'
 import { FaSearch } from "react-icons/fa";
+import {  getAllProjectsAPI } from '../Services/AllAPIs';
+
+
 function Projects() {
+
+  const getAllProjects= async()=>{
+  let token = sessionStorage.getItem('token');
+  if(token){
+    const reqHeader={
+      "Content-Type" : "application/json",
+      "Authorization" :" Bearer " +token
+    }
+    try{
+      const allProjects = await getAllProjectsAPI(reqHeader)
+      console.log(allProjects);
+    }
+    catch(error){
+      console.log(error);
+      
+    }
+  }
+
+}
+
+  useEffect(()=>{
+    getAllProjects()
+  },[])
+
+
   return (
     <>
       <div className='text-center container m-5 p-5 w-100'>
