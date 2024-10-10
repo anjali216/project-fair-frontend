@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React from 'react'
 import { BiSolidEdit } from "react-icons/bi";
@@ -5,7 +6,9 @@ import { BiLinkExternal } from "react-icons/bi";
 import { ImGithub } from "react-icons/im";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 
-function View() {
+function View({projects}) {
+  console.log(projects);
+  
   return (
     <div className='row'>
       <div className="col">
