@@ -1,6 +1,9 @@
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react'
+//import serverUrl from '../Services/ServerURL'
+import { serverURL } from "../Services/ServerURL";
+
 import {
     MDBCard,
     MDBCardBody,
@@ -30,7 +33,7 @@ function ProjectCard({projects}) {
     return (
     <div> <div className='row'>
     <MDBCard onClick={toggleOpen} style={{ width: '350px', height: '400px' }}>
-      <MDBCardImage src = 'https://liveimages.algoworks.com/new-algoworks/wp-content/uploads/2022/06/07132503/software-house-gif2-min.gif' position='top' width={'300px'} height={'350px'} alt='...' />
+      <MDBCardImage src = {projects? `${serverURL}/uploads/${projects.projectImg}` : 'https://liveimages.algoworks.com/new-algoworks/wp-content/uploads/2022/06/07132503/software-house-gif2-min.gif'} position='top' width={'300px'} height={'350px'} alt='...' />
       <MDBCardBody>
         <MDBCardTitle className='text-center'>{projects.title}</MDBCardTitle>
       </MDBCardBody>
@@ -46,7 +49,7 @@ function ProjectCard({projects}) {
         <MDBModalBody>
           <div className="row">
             <div className="col-6">
-              <img src="https://media.tenor.com/2fXbn6Xtt0UAAAAM/software-software-development.gif" width={'100%'} alt="" />
+            <img src="https://media.tenor.com/2fXbn6Xtt0UAAAAM/software-software-development.gif" width={'100%'} alt="" />
             </div>
             <div className="col-6">
               <h2>Description</h2>

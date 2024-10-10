@@ -10,7 +10,7 @@ function Dashboard() {
       let userName=user.username
   
   return (
-    <div className='row p-5'>
+    <div className='row p-5 '>
      <h2>Welcome {userName} </h2>
       <div className='col-6 shadow p-5 m-4'>
     <div className="row d-flex">
@@ -18,7 +18,8 @@ function Dashboard() {
         My Projects
       </div>
       <div className="col-6">
-       <button className='btn btn-info' style={{float:'right'}}><Add/></button>
+       {/* <button className='btn btn-info' style={{float:'right'}}><Add/></button> */}
+       <Add/>
       </div>
     </div>
      <div  className='row mt-3'>
@@ -27,7 +28,7 @@ function Dashboard() {
      </div>
      </div>
     </div>
-    <div className='col-4 shadow p-5'>
+    <div className='col-4  p-5'>
      <Profile/> 
     </div>
     </div>
