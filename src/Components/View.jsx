@@ -1,36 +1,73 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-key */
 // eslint-disable-next-line no-unused-vars
-import React from 'react'
-import { BiSolidEdit } from "react-icons/bi";
-import { BiLinkExternal } from "react-icons/bi";
-import { ImGithub } from "react-icons/im";
-import { RiDeleteBin5Fill } from "react-icons/ri";
+import React, { useContext, useState,useEffect } from 'react'
+import { TbEdit } from "react-icons/tb";
+import { FiExternalLink } from "react-icons/fi";
+import { IoLogoGithub } from "react-icons/io";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { addProjectContextResponse } from '../ContextAPI/ContextShare';
+import { getUserProjectsAPI } from '../Services/AllAPIs'
 
-function View({projects}) {
-  console.log(projects);
-  
+function View() {
+    const [projects,setProjects]=useState([])
+    console.log(projects);
+    const { addProjectRes,setAddProjectRes } = useContext(addProjectContextResponse)
+
+    const getUserProjects=async()=>{
+        let token = sessionStorage.getItem('token');
+        if(token){
+          const reqHeader={
+            "Content-Type": "application/json",
+            "Authorization":"Bearer " + token
+             }
+             try{
+              const allProjects = await getUserProjectsAPI(reqHeader)
+              console.log(allProjects.data);
+              if(allProjects.status==200){
+                setProjects(allProjects.data)
+              }
+              else{
+                console.log("Cant get projects");
+                
+              }
+             }
+             catch(error){
+              console.log(error);
+              
+             }
+        }
+         
+          
+      }
+      useEffect(()=>{
+        getUserProjects()
+      },[addProjectRes])
   return (
-    <div className='row'>
-      <div className="col">
-      <div className="row">
-        <div className="col-8">
-          <h5>Project Name</h5>
+    <>
+        <div className="row">
+        {
+              projects.length>0?projects.map(item=>(
+                <div className="col">
+             <div className="col border shadow p-3">
+                <div className="row">
+                    <div className="col-8 ">
+                        <h5>{item.title}</h5>
+                    </div>
+                    <div className="col-4" >
+                    <TbEdit className='fs-3 text-success fw-bolder me-2'/>
+                    <FiExternalLink  className='fs-3 text-primary fw-bolder me-2'/>
+                    <IoLogoGithub className='fs-3 text-black fw-bolder me-2' />
+                    <RiDeleteBin6Line className='fs-3 text-danger fw-bolder me-2'/>
+
+                    </div>
+                </div>
+            </div>
+            </div>
+              )):"No data"
+            }
+           
         </div>
-        <div className="col-4">
-        <BiSolidEdit className='fs-3 text-secondary fw-bolder me-2'/>
-        <BiLinkExternal className='fs-3 text-primary fw-bolder me-2' />
-        <ImGithub className='fs-3 text-black fw-bolder me-2' />
-        <RiDeleteBin5Fill  className='fs-3 text-danger fw-bolder me-2' />
-        </div>
-      
-     </div>
-
-
-
-
-      </div>
-
-    </div>
+    </>
   )
 }
 

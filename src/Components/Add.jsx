@@ -4,6 +4,7 @@ import userImg from '../assets/Auth.gif'
 import { toast,ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addProject } from '../Services/AllAPIs';
+import { addProjectContextResponse } from '../ContextAPI/ContextShare';
 
 import {
     MDBBtn,
@@ -15,11 +16,14 @@ import {
     MDBModalBody,
     MDBModalFooter,
   } from 'mdb-react-ui-kit';
+import { useContext } from 'react';
 
 
   
-
 function Add() {
+
+  const {setAddProjectRes} = useContext(addProjectContextResponse)
+
     const [staticModal, setStaticModal] = useState(false);
     const toggleOpen = () => setStaticModal(!staticModal);
 
@@ -84,6 +88,7 @@ function Add() {
           const response = await addProject(reqBody,reqHeader)
           console.log(response);
           if(response.status==200){
+            setAddProjectRes(response.data)
             toast.success('Project added successfully....', {
               position: "top-center",
               autoClose: 5000,
