@@ -43,14 +43,13 @@ function Dashboard() {
       getUserProjects()
     },[])
   
-  
 
 
 
   return (
     <div className='row p-5 '>
      <h2>Welcome {userName} </h2>
-      <div className='col-6 shadow p-5 m-4'>
+      <div className='col-7  p-5 m-4'>
     <div className="row d-flex">
       <div className="col-6">
         My Projects
@@ -66,7 +65,7 @@ function Dashboard() {
      </div>
      </div>
     </div>
-    <div className='col-4  p-5'>
+    <div className='col-4 shadow p-5'>
      <Profile/> 
     </div>
     </div>
