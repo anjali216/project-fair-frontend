@@ -9,15 +9,10 @@ import Profile from '../Components/Profile'
 
 function Dashboard() {
 
- 
-
 
     const user = JSON.parse(sessionStorage.getItem('user'))
     console.log(user);
     let userName=user.username
-  
-
-    
 
     
 
