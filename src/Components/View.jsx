@@ -1,6 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-key */
-// eslint-disable-next-line no-unused-vars
-import React, { useContext, useState,useEffect } from 'react'
+import  { useContext, useState,useEffect } from 'react'
 import { TbEdit } from "react-icons/tb";
 import { FiExternalLink } from "react-icons/fi";
 import { IoLogoGithub } from "react-icons/io";
@@ -12,6 +12,7 @@ function View() {
     const [projects,setProjects]=useState([])
     console.log(projects);
     const { addProjectRes,setAddProjectRes } = useContext(addProjectContextResponse)
+
 
     const getUserProjects=async()=>{
         let token = sessionStorage.getItem('token');
@@ -44,20 +45,20 @@ function View() {
       },[addProjectRes])
   return (
     <>
-        <div className="row">
+        <div className="">
         {
               projects.length>0?projects.map(item=>(
                 <div className="col">
-             <div className="col border shadow p-3">
+             <div className="col my-4 border shadow p-3">
                 <div className="row">
                     <div className="col-8 ">
                         <h5>{item.title}</h5>
                     </div>
-                    <div className="col-4" >
-                    <TbEdit className='fs-3 text-success fw-bolder me-2'/>
-                    <FiExternalLink  className='fs-3 text-primary fw-bolder me-2'/>
-                    <IoLogoGithub className='fs-3 text-black fw-bolder me-2' />
-                    <RiDeleteBin6Line className='fs-3 text-danger fw-bolder me-2'/>
+                    <div className="col-4 " >
+                    <TbEdit className='fs-4 text-success fw-bolder me-2'/>
+                    <FiExternalLink  className='fs-4 text-primary fw-bolder me-2'/>
+                    <IoLogoGithub className='fs-4 text-black fw-bolder me-2' />
+                    <RiDeleteBin6Line className='fs-4 text-danger fw-bolder me-2'/>
 
                     </div>
                 </div>

@@ -1,8 +1,10 @@
+/* eslint-disable react-refresh/only-export-components */
 /* eslint-disable react/prop-types */
-// eslint-disable-next-line no-unused-vars
-import React, { createContext,useState } from 'react'
+
+import  { createContext,useState } from 'react'
 
   //create context
+
 
 export const addProjectContextResponse = createContext()
 

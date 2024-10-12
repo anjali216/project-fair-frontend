@@ -17,7 +17,7 @@ function Dashboard() {
     
 
   return (
-    <div className='row p-5 '>
+    <div className='row '>
      <h2>Welcome {userName} </h2>
       <div className='col-7  p-5 m-4'>
     <div className="row d-flex">
@@ -25,17 +25,14 @@ function Dashboard() {
         My Projects
       </div>
       <div className="col-6">
-      
        <Add/>
       </div>
     </div>
-     <div  className=' mt-3'>
-
+     <div  className=' mt-3 '>
       <div className="col">
       <View  />
      </div>
       
-
      </div>
     </div>
     <div className='col-4 shadow p-5'>
