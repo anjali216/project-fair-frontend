@@ -26,33 +26,34 @@ function Add() {
 
   const {setAddProjectRes} = useContext(addProjectContextResponse)
 
-    const [staticModal, setStaticModal] = useState(false);
-    const toggleOpen = () => setStaticModal(!staticModal);
+  const [staticModal, setStaticModal] = useState(false);
+  const toggleOpen = () => setStaticModal(!staticModal);
 
-    const [ProjectDetails,setProjectDetails] = useState({
-      title:'',language:'',github:'',website:'',overview:'',ProjectImg:'',
-    })
-    console.log(ProjectDetails);
-    
+  const [ProjectDetails,setProjectDetails] = useState({
+    title:'',language:'',github:'',website:'',overview:'',ProjectImg:'',
+  })
+  console.log(ProjectDetails);
+  
 
-    const [imgFileStatus,setImgFileStatus] = useState(false)
+  const [imgFileStatus,setImgFileStatus] = useState(false)
 
-    //to assign image url
-    const [preview,setPreview] = useState(userImg);
+  //to assign image url
+  const [preview,setPreview] = useState(userImg);
 
 
-    useEffect(()=>{
-      if(ProjectDetails.ProjectImg.type ==='image/png' || ProjectDetails.ProjectImg.type ==='image/jpeg'|| ProjectDetails.ProjectImg.type ==='image/jpg'){
-        setImgFileStatus(true)
+  useEffect(()=>{
+    if(ProjectDetails.ProjectImg.type ==='image/png' || ProjectDetails.ProjectImg.type ==='image/jpeg'|| ProjectDetails.ProjectImg.type ==='image/jpg'){
+      setImgFileStatus(true)
 
-        //convert img file into url 
-        setPreview(URL.createObjectURL(ProjectDetails.ProjectImg))
-      }
-      else{
-        setImgFileStatus(false)
-        // setProjectDetails({...ProjectDetails,ProjectImg:""})
-      }      
-    },[ProjectDetails.ProjectImg])
+      //convert img file into url 
+      setPreview(URL.createObjectURL(ProjectDetails.ProjectImg))
+    }
+    else{
+      setImgFileStatus(false)
+      // setProjectDetails({...ProjectDetails,ProjectImg:""})
+    }      
+  },[ProjectDetails.ProjectImg])
+
 
     const handleAdd= async() =>{
      console.log("inside add");
