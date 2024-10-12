@@ -7,6 +7,7 @@ import { IoLogoGithub } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { addProjectContextResponse } from '../ContextAPI/ContextShare';
 import { getUserProjectsAPI } from '../Services/AllAPIs'
+import Edit from './Edit';
 
 function View() {
     const [projects,setProjects]=useState([])
@@ -57,6 +58,7 @@ function View() {
                     <div className="col-4 " >
                     <TbEdit className='fs-4 text-success fw-bolder me-2'/>
                     <FiExternalLink  className='fs-4 text-primary fw-bolder me-2'/>
+                    <Edit/>
                     <IoLogoGithub className='fs-4 text-black fw-bolder me-2' />
                     <RiDeleteBin6Line className='fs-4 text-danger fw-bolder me-2'/>
 
