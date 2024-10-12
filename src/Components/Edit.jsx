@@ -3,6 +3,8 @@ import React, { useEffect, useState,useContext } from 'react'
 import userImg from '../assets/Auth.gif'
 import {  toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { TbEdit } from "react-icons/tb";
+
 import {
   MDBBtn,
   MDBModal,
@@ -132,7 +134,7 @@ function Edit() {
 
   return (
     <div>
-       <MDBBtn  className='btn btn-info' style={{float:'right'}}  onClick={toggleOpen}>Add</MDBBtn>
+       <MDBBtn  className='btn' style={{float:'right'}}  onClick={toggleOpen}> <TbEdit className='fs-4 text-white fw-bolder me-2'/> </MDBBtn>
 
        <MDBModal staticBackdrop tabIndex='-1' open={staticModal} onClose={() => setStaticModal(false)}>
        <MDBModalDialog size='lg'>
@@ -173,7 +175,7 @@ function Edit() {
         <MDBBtn color='secondary' type='submit' onClick={toggleOpen}>
           Cancel
         </MDBBtn>
-        <MDBBtn className='bg-primary' type='submit' onClick={handleAdd} >Add</MDBBtn>
+        <MDBBtn className='bg-primary' type='submit' onClick={handleAdd}>Add</MDBBtn>
       </MDBModalFooter>
     </MDBModalContent>
   </MDBModalDialog>

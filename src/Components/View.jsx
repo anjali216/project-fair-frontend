@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-key */
 import  { useContext, useState,useEffect } from 'react'
-import { TbEdit } from "react-icons/tb";
+
 import { FiExternalLink } from "react-icons/fi";
 import { IoLogoGithub } from "react-icons/io";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -56,9 +56,10 @@ function View() {
                         <h5>{item.title}</h5>
                     </div>
                     <div className="col-4 " >
-                    <TbEdit className='fs-4 text-success fw-bolder me-2'/>
-                    <FiExternalLink  className='fs-4 text-primary fw-bolder me-2'/>
                     <Edit/>
+                 
+                    <FiExternalLink  className='fs-4 text-primary fw-bolder me-2'/>
+                    
                     <IoLogoGithub className='fs-4 text-black fw-bolder me-2' />
                     <RiDeleteBin6Line className='fs-4 text-danger fw-bolder me-2'/>
 
