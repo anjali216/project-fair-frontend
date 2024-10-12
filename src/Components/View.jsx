@@ -56,7 +56,7 @@ function View() {
                         <h5>{item.title}</h5>
                     </div>
                     <div className="col-4 " >
-                    <Edit/>
+                    <Edit item={item}/>
                  
                     <FiExternalLink  className='fs-4 text-primary fw-bolder me-2'/>
                     

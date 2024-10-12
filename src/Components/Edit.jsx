@@ -1,5 +1,6 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useEffect, useState,useContext } from 'react'
+/* eslint-disable react/prop-types */
+
+import  { useEffect, useState,useContext } from 'react'
 import userImg from '../assets/Auth.gif'
 import {  toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,7 +20,8 @@ import { addProject } from '../Services/AllAPIs';
 import { addProjectContextResponse } from '../ContextAPI/ContextShare';
 
 
-function Edit() {
+function Edit({item}) {
+console.log(item);
 
   const {setAddProjectRes} = useContext(addProjectContextResponse)
 
@@ -27,7 +29,7 @@ function Edit() {
   const toggleOpen = () => setStaticModal(!staticModal);
 
   const [ProjectDetails,setProjectDetails] = useState({
-    title:'',language:'',github:'',website:'',overview:'',ProjectImg:'',
+    title:'',language:item.language,github:'',website:'',overview:'',ProjectImg:'',
   })
   console.log(ProjectDetails);
   
@@ -162,8 +164,8 @@ function Edit() {
       
         <div className="col">
             <form>
-                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,title:e.target.value})} className='form-control mb-3' placeholder='Title' />
-                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,language:e.target.value})} className='form-control mb-3' placeholder='Language' />
+                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,title:e.target.value})}   className='form-control mb-3' placeholder='Title' />
+                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,language:e.target.value})}  className='form-control mb-3' placeholder='Language' />
                 <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,github:e.target.value})} className='form-control mb-3' placeholder='Github' />
                 <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,website:e.target.value})} className='form-control mb-3' placeholder='Website' />
                 <textarea onChange={(e)=>setProjectDetails({...ProjectDetails,overview:e.target.value})} className='form-control mb-3' placeholder='Overview'> </textarea>
