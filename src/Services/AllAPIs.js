@@ -31,3 +31,8 @@ export const getUserProjectsAPI = async(reqHeader)=>{
 export const getHomeProjectsAPI =async()=>{
     return await commonAPI ('get',`${serverURL}/api/getHomeProjects`,"","")
 }
+
+//edit
+export const editProject = async(project,reqHeader)=>{
+    return await commonAPI ('post',`${serverURL}/api/editProject`,project,reqHeader)
+}

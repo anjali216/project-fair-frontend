@@ -1,8 +1,7 @@
 
 /* eslint-disable react/prop-types */
-
 import  { useEffect, useState,useContext } from 'react'
-import userImg from '../assets/Auth.gif'
+//import userImg from '../assets/Auth.gif'
 import {  toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { TbEdit } from "react-icons/tb";
@@ -19,6 +18,8 @@ import {
 } from 'mdb-react-ui-kit';
 import { addProject } from '../Services/AllAPIs';
 import { addProjectContextResponse } from '../ContextAPI/ContextShare';
+import { serverURL } from '../Services/ServerURL';
+
 
 
 function Edit({item}) {
@@ -30,7 +31,7 @@ console.log(item);
   const toggleOpen = () => setStaticModal(!staticModal);
 
   const [ProjectDetails,setProjectDetails] = useState({
-    title:'',language:item.language,github:'',website:'',overview:'',ProjectImg:'',
+    title:item.title,language:item.language,github:item.language,website:item.website,overview:item.overview,projectImg:item.projectImg,
   })
   console.log(ProjectDetails);
   
@@ -38,27 +39,27 @@ console.log(item);
   const [imgFileStatus,setImgFileStatus] = useState(false)
 
   //to assign image url
-  const [preview,setPreview] = useState(userImg);
+  const [preview,setPreview] = useState(ProjectDetails.projectImg);
 
 
   useEffect(()=>{
-    if(ProjectDetails.ProjectImg.type ==='image/png' || ProjectDetails.ProjectImg.type ==='image/jpeg'|| ProjectDetails.ProjectImg.type ==='image/jpg'){
+    if(ProjectDetails.projectImg.type ==='image/png' || ProjectDetails.projectImg.type ==='image/jpeg'|| ProjectDetails.projectImg.type ==='image/jpg'){
       setImgFileStatus(true)
 
       //convert img file into url 
-      setPreview(URL.createObjectURL(ProjectDetails.ProjectImg))
+      setPreview(URL.createObjectURL(ProjectDetails.projectImg))
     }
     else{
       setImgFileStatus(false)
       // setProjectDetails({...ProjectDetails,ProjectImg:""})
     }      
-  },[ProjectDetails.ProjectImg])
+  },[ProjectDetails.projectImg])
 
 
   const handleAdd= async() =>{
     console.log("inside add");
-    const {title,language,github,website,overview,ProjectImg} = ProjectDetails
-    if(!title || !language ||!github||!website||!overview ||!ProjectImg){
+    const {title,language,github,website,overview,projectImg} = ProjectDetails
+    if(!title || !language ||!github||!website||!overview ||!projectImg){
      toast.warn('Please fill the form', {
        position: "top-center",
        autoClose: 5000,
@@ -77,7 +78,7 @@ console.log(item);
      reqBody.append("github",github)
      reqBody.append("website",website)
      reqBody.append("overview",overview)
-     reqBody.append("projectImg",ProjectImg)
+     reqBody.append("projectImg",projectImg)
    
      const token =sessionStorage.getItem("token")
      if(token){
@@ -109,7 +110,7 @@ console.log(item);
                github:"",
                website:"",
                overview:"",
-               ProjectImg
+               projectImg
              })
              setPreview("")
          }
@@ -151,7 +152,7 @@ console.log(item);
             <div className="col-6 p-2 m-3">
                 <label >
                     <input type="file" onChange={(e)=>setProjectDetails({...ProjectDetails,ProjectImg:e.target.files[0]})} style={{display:'none'}} />
-                    <img src={preview} width={'100%'} alt="" />
+                    <img src = { preview?  preview:ProjectDetails? `${serverURL}/uploads/${ProjectDetails.ProjectImg}` : 'https://liveimages.algoworks.com/new-algoworks/wp-content/uploads/2022/06/07132503/software-house-gif2-min.gif'} width={'100%'} alt="" />
                 </label>
                 {
                   !imgFileStatus && 
@@ -159,17 +160,17 @@ console.log(item);
                   jpg,.jpeg,.png
 
                   </div>
-                }
+                }={}
             </div>
       
       
         <div className="col">
             <form>
-                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,title:e.target.value})}   className='form-control mb-3' placeholder='Title' />
-                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,language:e.target.value})}  className='form-control mb-3' placeholder='Language' />
-                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,github:e.target.value})} className='form-control mb-3' placeholder='Github' />
-                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,website:e.target.value})} className='form-control mb-3' placeholder='Website' />
-                <textarea onChange={(e)=>setProjectDetails({...ProjectDetails,overview:e.target.value})} className='form-control mb-3' placeholder='Overview'> </textarea>
+                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,title:e.target.value})} value={ProjectDetails.title} className='form-control mb-3' placeholder='Title' />
+                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,language:e.target.value})} value={ProjectDetails.language} className='form-control mb-3' placeholder='Language' />
+                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,github:e.target.value})} value={ProjectDetails.github} className='form-control mb-3' placeholder='Github' />
+                <input type="text" onChange={(e)=>setProjectDetails({...ProjectDetails,website:e.target.value})}value={ProjectDetails.website} className='form-control mb-3' placeholder='Website' />
+                <textarea onChange={(e)=>setProjectDetails({...ProjectDetails,overview:e.target.value})} value={ProjectDetails.overview}  className='form-control mb-3' placeholder='Overview'> </textarea>
             </form>
         </div>
         </div>
