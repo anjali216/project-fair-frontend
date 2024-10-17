@@ -23,15 +23,17 @@ import { serverURL } from '../Services/ServerURL';
 
 
 function Edit({item}) {
-console.log(item);
+ console.log(item);
 
   const {setAddProjectRes} = useContext(addProjectContextResponse)
 
   const [staticModal, setStaticModal] = useState(false);
   const toggleOpen = () => setStaticModal(!staticModal);
+  // setPreview("")
 
   const [ProjectDetails,setProjectDetails] = useState({
     title:item.title,language:item.language,github:item.language,website:item.website,overview:item.overview,projectImg:item.projectImg,
+    
   })
   console.log(ProjectDetails);
   
@@ -39,7 +41,7 @@ console.log(item);
   const [imgFileStatus,setImgFileStatus] = useState(false)
 
   //to assign image url
-  const [preview,setPreview] = useState(ProjectDetails.projectImg);
+  const [preview,setPreview] = useState("");
 
 
   useEffect(()=>{
@@ -51,15 +53,15 @@ console.log(item);
     }
     else{
       setImgFileStatus(false)
-      // setProjectDetails({...ProjectDetails,ProjectImg:""})
+      // setProjectDetails({...ProjectDetails,projectImg:""})
     }      
   },[ProjectDetails.projectImg])
 
 
   const handleAdd= async() =>{
     console.log("inside add");
-    const {title,language,github,website,overview,projectImg} = ProjectDetails
-    if(!title || !language ||!github||!website||!overview ||!projectImg){
+    const {title,language,github,website,projectImg,overview} = ProjectDetails
+    if(!title || !language ||!github||!website||!overview||!projectImg){
      toast.warn('Please fill the form', {
        position: "top-center",
        autoClose: 5000,
@@ -104,15 +106,18 @@ console.log(item);
              theme: "colored",
              });
              toggleOpen()
-             ProjectDetails({
-               title:"",
-               language:"",
-               github:"",
-               website:"",
-               overview:"",
-               projectImg
-             })
-             setPreview("")
+             ProjectDetails(
+              {
+                id:item._id,
+                title: item.title,
+                language: item.language,
+                github: item.github,
+                website: item.website,
+                overview: item.overview,
+                projectImg: item.projectImg
+              }
+            )
+            setPreview("")
          }
          else{
            toast.error(response.response.data, {
@@ -149,10 +154,10 @@ console.log(item);
       </MDBModalHeader>
       <MDBModalBody> 
         <div className="row d-flex justify-content-evenly ">
-            <div className="col-6 p-2 m-3">
+        <div className="col-6 p-2 m-3">
                 <label >
-                    <input type="file" onChange={(e)=>setProjectDetails({...ProjectDetails,ProjectImg:e.target.files[0]})} style={{display:'none'}} />
-                    <img src = { preview?  preview:ProjectDetails? `${serverURL}/uploads/${ProjectDetails.ProjectImg}` : 'https://liveimages.algoworks.com/new-algoworks/wp-content/uploads/2022/06/07132503/software-house-gif2-min.gif'} width={'100%'} alt="" />
+                    <input type="file" onChange={(e)=>setProjectDetails({...ProjectDetails,projectImg:e.target.files[0]})} style={{display:'none'}} />
+                    <img src = { preview?  preview:`${serverURL}/uploads/${ProjectDetails.projectImg}`  } width={'100%'} alt="" />
                 </label>
                 {
                   !imgFileStatus && 
@@ -160,7 +165,7 @@ console.log(item);
                   jpg,.jpeg,.png
 
                   </div>
-                }={}
+                }
             </div>
       
       
